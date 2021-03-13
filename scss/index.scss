@@ -1,0 +1,604 @@
+$breakpoint: 1024px;
+$gap: 3rem;
+
+$font-family-primary: 'Alata', sans-serif;
+$font-family-secondary: 'Josefin Sans', sans-serif;
+
+// colors
+$red: hsl(0, 78%, 62%);
+$cyan: hsl(180, 62%, 55%);
+$orange: hsl(34, 97%, 64%);
+$blue: hsl(212, 86%, 64%);
+
+$dark: black;
+$grey: #a3a5ae;
+$light: hsl(0, 0%, 98%);
+
+html {
+    font-size: 62.5%;
+    box-sizing: border-box;
+}
+
+*, *:after, *:before {
+    margin: 0;
+    padding: 0;
+    box-sizing: inherit;
+}
+
+body {
+    font-family: $font-family-primary;
+    font-size: 1.6rem;
+    color: $grey;
+    background-color: $light;
+
+}
+
+h1, h2, h3 {
+    font-family: $font-family-secondary;
+    font-weight: 300;
+    color: $dark;
+}
+
+a {
+    text-decoration: none;
+}
+
+.hidden {
+    display: none;
+}
+
+.is-hidden-touch {
+    @media (max-width: $breakpoint) {
+        display: none !important;
+    }
+}
+
+.is-hidden-desktop {
+    @media (min-width: $breakpoint) {
+        display: none !important;
+    }
+}
+
+.overflow-hidden {
+    @media (max-width: $breakpoint) {
+        overflow: hidden;
+    }
+    
+}
+
+.cool-link {
+    display: inline-block;
+    text-decoration: none;
+    &:after {
+        position: relative;
+        bottom: -0.5rem;
+        left: 50%;
+        transform: translateX(-50%);
+        content: "";
+        display: block;
+        width: 0;
+        height: 2px;
+        background: currentColor;
+        transition: width .3s;
+    }
+
+    &:hover {
+        &:after {
+            width: 50%;
+        }
+    }
+}
+
+.btn {
+    position: relative;
+    padding: .8rem 3rem;
+    cursor: pointer;
+    text-transform: uppercase;
+    font-size: 1.3rem;
+    letter-spacing: 1px;
+    color: $dark;
+    background-color: transparent;
+    border: 1px solid $dark;
+    transition: all 0.3s ease-in-out;
+
+    &:hover,
+    &:focus {
+        color: $light;
+        background-color: $dark;
+    }
+}
+
+.icon {
+    &--md {
+        width: 3rem;
+        height: 3rem;
+    }
+}
+
+
+.container {
+    max-width: 65rem;
+    margin: 0 auto;
+    padding: 0 $gap;
+    @media (min-width: 1024px) {
+        max-width: 111.5rem;
+    }
+
+
+}
+
+.header {
+    position: absolute;
+    z-index: 10;
+    top: 4rem;
+    left: 0;
+    width: 100%;
+    background-color: transparent;
+
+    @media (min-width: $breakpoint) {
+        top: 6rem;
+    }
+
+    &__navbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    &__logo {
+        max-width: 48%;
+        width: 25rem;
+        line-height: 0;
+        @media (min-width: $breakpoint) {
+            max-width: 16rem;
+        }
+        img {
+            width: 100%;
+        }
+    }
+
+    &__button {
+        position: relative;
+        width: 2.4rem;
+        height: 2rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    
+        &>* {
+            width: 100%;
+            height: 2px;
+            background-color: $light;
+            transition: all .3s ease-in-out;
+
+            &:nth-child(1) {
+                transform-origin: left 0.125rem;
+            }
+
+            &:nth-child(2) {
+                transform-origin: left center;
+            }
+            &:nth-child(3) {
+                transform-origin: left 0;
+            }             
+        }
+    }
+
+    &__menu {
+        display: none;
+        @media (min-width: $breakpoint) {
+            display: block;
+        }
+        &-item {
+            @extend .cool-link;
+            font-family: $font-family-secondary;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: $light;
+            &:not(:last-child) {
+                margin-right: 2.5rem;
+            }
+        }
+    }
+
+    &.menu-open {
+        @media (max-width: $breakpoint) {
+            top: 0;
+            height: 100%;
+            padding-top: 4rem;
+            color: $light;
+            background-color: $dark;
+
+            .header__button {
+                span {
+                    &:nth-child(1) {
+                        transform: rotate(45deg);
+                    }
+    
+                    &:nth-child(2) {
+                        opacity: 0;
+                    }
+    
+                    &:nth-child(3) {
+                        transform: rotate(-45deg);
+                    }                
+                }
+            }
+    
+            .header__menu {
+                position: absolute;
+                top: 20rem;
+                display: flex;
+                flex-direction: column;
+                &-item {
+                    margin: 0 0 3rem;
+                    text-transform: uppercase;
+                    font-size: 2.4rem;
+                    font-weight: 100;
+
+                    &::after {
+                        left: 0;
+                        transform: translateX(0);
+                    }
+                }
+            }
+        }
+
+    }
+}
+
+.hero {
+    min-height: 64rem;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-blend-mode: darken;
+    background-color: rgba($dark, 0.2);
+    background-image: url(../images/mobile/image-hero.jpg);
+
+    @media (min-width: $breakpoint) {
+        background-image: url(../images/desktop/image-hero.jpg);
+        background-position: center;
+    }
+
+    &__container {
+        height: 64rem;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+    }
+
+    &__text {
+        width: 100%;
+        padding: 2.5rem;
+        border: 2px solid $light;
+
+        @media (min-width: $breakpoint) {
+            margin-top: 4rem;
+            max-width: 60%;
+            padding: 3rem;
+        }
+    }
+
+    &__title {
+        display: table-caption;
+        word-spacing: unset;
+        text-transform: uppercase;
+        font-size: 2.4rem;
+        font-weight: 300;
+        color: $light;
+
+        @media (min-width: 360px) {
+            font-size: 3.6rem;
+        }
+
+        @media (min-width: 460px) {
+            font-size: 4.4rem;
+        }        
+
+        @media (min-width: $breakpoint) {
+            display: block;
+            font-size: 6.4rem;
+        }
+
+    }
+}
+
+.feature {
+    margin: 6.4rem 0;
+    padding: 4rem 0;
+    text-align: center;
+    @media (min-width: $breakpoint) {
+        text-align: left;
+    }
+
+    &__container {
+        position: relative;
+    }
+
+    &__image {
+        position: relative;
+        margin-bottom: 3rem;
+        @media (min-width: $breakpoint) {
+            max-width: 73rem;
+            min-height: 50rem;
+        }
+        img {
+            width: 100%;
+        }
+    }
+
+    &__description {
+
+        @media (min-width: $breakpoint) {
+            position: absolute;
+            right: 0;
+            bottom: -3rem;
+            max-width: 52rem;
+            padding: 8rem 3rem 3rem 8rem;
+            background-color: $light;
+        }
+        
+    }
+    
+    &__title {
+        margin-bottom: 2rem;
+        text-transform: uppercase;
+        font-size: 3.2rem;
+        @media (min-width: $breakpoint) {
+            font-size: 4.1rem;
+        }
+        
+    }
+    &__paragraph {
+        font-size: 1.4rem;
+        line-height: 2;
+        @media (min-width: $breakpoint) {
+
+        }
+    }
+}
+
+.creations {
+    margin: 6.4rem 0;
+    padding: 4rem 0;
+    &__container {}
+
+    &__header {
+        margin-bottom: 3rem;
+        padding: 2rem 0;
+        text-align: center;
+        @media (min-width: $breakpoint) {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+    }
+
+    &__title {
+        text-transform: uppercase;
+        font-size: 3.2rem;
+        font-weight: 400;
+        
+    }
+
+    &__content {
+        margin-bottom: 3rem;
+
+        @media (min-width: $breakpoint) {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(12.5rem, 1fr));
+            gap: 3rem;
+        }
+
+        &__item {
+            position: relative;
+            width: 100%;
+            height: 20rem;
+            margin: 0 auto;
+            &:not(:last-child) {
+                margin-bottom: 3rem;
+            }
+            cursor: pointer;
+            overflow: hidden;
+            // max-width: 46rem;
+            transition: all .5s ease-in-out;
+            background-size: cover;
+            background-position: center;
+            background-color: $dark;
+
+            @media (min-width: $breakpoint) {
+                max-width: 48rem;
+                height: 33rem;
+                margin-bottom: 0 !important;
+                background-position: top center;
+            }
+
+            &:before {
+                opacity: 0;
+                position: absolute;
+                content: '';
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(255, 255, 255, .5);
+                backdrop-filter: blur(2px);
+                transition: all .3s ease-in-out;
+            }
+
+            &.deep-earth {
+                background-image: linear-gradient(to left, transparent, rgba(0,0,0,0.6)), url(../images/mobile/image-deep-earth.jpg);
+                @media (min-width: $breakpoint) {
+                    background-image: linear-gradient(to top, transparent, rgba(0,0,0,0.6)), url(../images/desktop/image-deep-earth.jpg);
+                }
+            }
+            &.night-arcade {
+                background-image: linear-gradient(to left, transparent, rgba(0,0,0,0.6)), url(../images/mobile/image-night-arcade.jpg);
+                @media (min-width: $breakpoint) {
+                    background-image: linear-gradient(to bottom, transparent, rgba(0,0,0,0.6)), url(../images/desktop/image-night-arcade.jpg);
+                }
+            }
+            &.soccer-team-vr {
+                background-image: linear-gradient(to left, transparent, rgba(0,0,0,0.6)), url(../images/mobile/image-soccer-team.jpg);
+                @media (min-width: $breakpoint) {
+                    background-image: linear-gradient(to bottom, transparent, rgba(0,0,0,0.6)), url(../images/desktop/image-soccer-team.jpg);
+                }
+            }
+            &.the-grid {
+                background-image: linear-gradient(to left, transparent, rgba(0,0,0,0.6)), url(../images/mobile/image-grid.jpg);
+                @media (min-width: $breakpoint) {
+                    background-image: linear-gradient(to bottom, transparent, rgba(0,0,0,0.6)), url(../images/desktop/image-grid.jpg);
+                }
+            }
+            &.from-up-above-vr {
+                background-image: linear-gradient(to left, transparent, rgba(0,0,0,0.6)), url(../images/mobile/image-from-above.jpg);
+                @media (min-width: $breakpoint) {
+                    background-image: linear-gradient(to bottom, transparent, rgba(0,0,0,.8)), url(../images/desktop/image-from-above.jpg);
+                }
+            }
+            &.pocket-borealis {
+                background-image: linear-gradient(to left, transparent, rgba(0,0,0,0.6)), url(../images/mobile/image-pocket-borealis.jpg);
+                @media (min-width: $breakpoint) {
+                    background-image: linear-gradient(to bottom, transparent, rgba(0,0,0,0.6)), url(../images/desktop/image-pocket-borealis.jpg);
+                }
+            }
+            &.the-curiosity {
+                background-image: linear-gradient(to left, transparent, rgba(0,0,0,0.6)), url(../images/mobile/image-curiosity.jpg);
+                @media (min-width: $breakpoint) {
+                    background-image: linear-gradient(to bottom, transparent, rgba(0,0,0,0.6)), url(../images/desktop/image-curiosity.jpg);
+                }
+            }
+            &.make-it-fisheye {
+                background-image: linear-gradient(to left, transparent, rgba(0,0,0,0.6)), url(../images/mobile/image-fisheye.jpg);
+                @media (min-width: $breakpoint) {
+                    background-image: linear-gradient(to bottom, transparent, rgba(0,0,0,0.8)), url(../images/desktop/image-fisheye.jpg);
+                }
+            }
+
+            h3 {
+                position: absolute;
+                bottom: 2rem;
+                left: 2rem;
+                max-width: 45%;
+                text-transform: uppercase;
+                font-size: 2.7rem;
+                color: $light;
+                transition: color .5s ease-in-out;
+
+                @media (min-width: $breakpoint) {
+                    bottom: 3rem;
+                    left: 3rem;
+                    max-width: 58%;
+                }
+            }
+
+            &:hover {
+                &:before {
+                    opacity: 1;
+                }
+
+                h3 {
+                    color: $dark;
+                }
+            }
+        }
+    }
+
+    &__footer {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}
+
+.footer {
+    margin-top: 6.4rem;
+    text-align: center;
+    color: $grey;
+    background: $dark;
+    @media (min-width: $breakpoint) {
+        text-align: left;
+    }
+    
+    &__container {
+        padding-top: 4rem;
+        padding-bottom: 4rem;
+    }
+    
+    &__group {
+        &__wrapper {
+            @media (min-width: $breakpoint) {
+                display: flex;
+                align-items: flex-end;
+            }
+        }
+        &__item {
+            flex: 1;
+        }
+    }
+    
+    &__logo {
+        margin-bottom: 3rem;
+        @media (min-width: $breakpoint) {
+            margin-bottom: 5rem;
+        }
+    }
+    
+    &__menu {
+        margin-bottom: 5rem;
+        display: flex;
+        flex-direction: column;
+        @media (min-width: $breakpoint) {
+            margin-bottom: 0;
+            flex-direction: row;
+        }
+        &-item {
+            @extend .cool-link;
+            color: $light;
+            &:not(:last-child) {
+                margin-bottom: 3rem;
+            }
+            
+            @media (min-width: $breakpoint) {
+                &:not(:last-child) {
+                    margin-right: 3rem;
+                }
+            }
+        }
+    }
+    
+    &__social {
+        margin-bottom: 3rem;
+        @media (min-width: $breakpoint) {
+            margin-top: 3rem;
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        &-item {
+            @extend .cool-link;
+            color: $light;
+
+            &:not(:last-child) {
+                margin-right: 3rem;
+            }
+        }
+    }
+    
+    &__copyright {
+        margin-bottom: 3rem;
+        @media (min-width: $breakpoint) {
+            display: flex;
+            justify-content: flex-end;
+        }
+    }
+
+    .attribution {
+        font-size: 1.3rem;
+        a {
+            @extend .cool-link;
+            color: $light;
+        }
+    }
+
+}
